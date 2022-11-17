@@ -39,6 +39,7 @@ pipeline {
  }
 stage('Build Image') {
 
+ environment { QUAY = credentials('QUAY_USER') }
 
  steps {
 
@@ -50,7 +51,7 @@ stage('Build Image') {
 
  sh '''
 
- ./mvnw package -DskipTests -Dquarkus.jib.base-jvm-image=quay.io/redhattraining/do400-java-alpineopenjdk11-jre:latest -Dquarkus.container-image.build=true -Dquarkus.container-image.registry=quay.io -Dquarkus.container-image.group=thladik -Dquarkus.container-image.name=do400-deploying-environments -Dquarkus.container-image.username=thladik -Dquarkus.container-image.password="Most33fast1990" -Dquarkus.container-image.push=true
+ ./mvnw package -DskipTests -Dquarkus.jib.base-jvm-image=quay.io/redhattraining/do400-java-alpineopenjdk11-jre:latest -Dquarkus.container-image.build=true -Dquarkus.container-image.registry=quay.io -Dquarkus.container-image.group=$QUAY_USR -Dquarkus.container-image.name=do400-deploying-environments -Dquarkus.container-image.username=$QUAY_USR -Dquarkus.container-image.password="$QUAY_PSW" -Dquarkus.container-image.push=true
 
  '''
 
