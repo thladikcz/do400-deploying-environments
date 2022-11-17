@@ -39,7 +39,7 @@ pipeline {
  }
 stage('Build Image') {
 
- environment { QUAY = credentials('QUAY_USER') }
+ environment { QUAY = credentials('thladik') }
 
  steps {
 
